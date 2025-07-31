@@ -61,6 +61,13 @@ cd fullstack-todo
 
 ---
 
+### 🔐 New Features
+- JWT authentication with multi‑user support
+- Secure task management per user
+- Fully Dockerized full‑stack deployment
+
+---
+
 ### Example
 
 ![screenshot](example/screenshot%201.png)
@@ -68,6 +75,11 @@ cd fullstack-todo
 ![screenshot](example/screenshot%203.png)
 ![screenshot](example/screenshot%204.png)
 ![screenshot](example/screenshot%205.png)
+![screenshot](example/screenshot%206.png)
+![screenshot](example/screenshot%207.png)
+![screenshot](example/screenshot%208.png)
+![screenshot](example/screenshot%209.png)
+![screenshot](example/screenshot%2010.png)
 
 ---
 
