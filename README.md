@@ -7,7 +7,7 @@ A **production-ready full-stack Todo application** built with:
 
 ---
 
-## **📌 Features**  
+## **📌 Features**
 
 ✅ Add, View, and Delete tasks  
 ✅ React frontend communicates with Flask backend via REST API  
@@ -18,6 +18,7 @@ A **production-ready full-stack Todo application** built with:
 ---
 
 ### Access the Application
+
 - Frontend (React + Nginx): ```http://localhost:8081```
 - Backend (Flask API): ```http://localhost:8080/tasks```
 
@@ -33,6 +34,7 @@ cd fullstack-todo
 ---
 
 ### 🛠️ Tech Stack
+
 - Frontend: React, Vite, Axios
 - Backend: Python, Flask, Flask-CORS
 - DevOps: Docker, Docker Compose, Nginx
@@ -40,6 +42,7 @@ cd fullstack-todo
 ---
 
 ### Example
+
 ![screenshot](example/screenshot%201.png)
 ![screenshot](example/screenshot%202.png)
 ![screenshot](example/screenshot%203.png)
