@@ -55,7 +55,7 @@ cd fullstack-todo
 ### 🛠️ Tech Stack
 
 - Frontend: React, Vite, Axios
-- Backend: Python, Flask, Flask-CORS, SQLAlchemy
+- Backend: Python, Flask, Flask-CORS, SQLAlchemy, JWT
 - Database: PostgreSQL 15
 - DevOps: Docker, Docker Compose, Nginx
 
