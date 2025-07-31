@@ -5,6 +5,10 @@ services:
     build: ./backend
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://todo_user:todo_pass@db:5432/todo_db
     networks:
       - todo-net
 
@@ -18,6 +22,21 @@ services:
       - backend
     networks:
       - todo-net
+
+  db:
+    image: postgres:15
+    container_name: todo_db
+    environment:
+      - POSTGRES_USER=todo_user
+      - POSTGRES_PASSWORD=todo_pass
+      - POSTGRES_DB=todo_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - todo-net
+
+volumes:
+  pgdata:
 
 networks:
   todo-net:

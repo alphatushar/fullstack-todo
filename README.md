@@ -11,7 +11,8 @@ A **production-ready full-stack Todo application** built with:
 
 ✅ Add, View, and Delete tasks  
 ✅ React frontend communicates with Flask backend via REST API  
-✅ Fully containerized with Docker Compose  
+✅ Fully containerized with Docker Compose
+✅ Database PostgreSQL (containerized with Docker)  
 ✅ Production-ready frontend served by Nginx  
 ✅ Easily deployable to any cloud provider  
 
@@ -23,6 +24,24 @@ A **production-ready full-stack Todo application** built with:
 - Backend (Flask API): ```http://localhost:8080/tasks```
 
 ---
+
+### Database
+
+```
+DB Host: db 
+DB Name: todo_db
+User: todo_user
+Password: todo_pass
+```
+
+---
+
+### Example Query
+
+```
+docker exec -it todo_db psql -U todo_user -d todo_db
+SELECT * FROM task;
+```
 
 ### Clone the Repository
 
@@ -36,7 +55,8 @@ cd fullstack-todo
 ### 🛠️ Tech Stack
 
 - Frontend: React, Vite, Axios
-- Backend: Python, Flask, Flask-CORS
+- Backend: Python, Flask, Flask-CORS, SQLAlchemy
+- Database: PostgreSQL 15
 - DevOps: Docker, Docker Compose, Nginx
 
 ---
@@ -46,6 +66,8 @@ cd fullstack-todo
 ![screenshot](example/screenshot%201.png)
 ![screenshot](example/screenshot%202.png)
 ![screenshot](example/screenshot%203.png)
+![screenshot](example/screenshot%204.png)
+![screenshot](example/screenshot%205.png)
 
 ---
 
