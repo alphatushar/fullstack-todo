@@ -58,6 +58,8 @@ cd fullstack-todo
 - Backend: Python, Flask, Flask-CORS, SQLAlchemy, JWT
 - Database: PostgreSQL 15
 - DevOps: Docker, Docker Compose, Nginx
+- Frontend External Deployment: Netlify
+- Backend External Deployment: Railway
 
 ---
 
@@ -65,6 +67,14 @@ cd fullstack-todo
 - JWT authentication with multi‑user support
 - Secure task management per user
 - Fully Dockerized full‑stack deployment
+- Frontend Externally hosted on Netlify
+- Backend Externally hosted on Railway
+
+---
+
+### Deployment Enhancements
+- **Frontend (Netlify) ✅** (Deployed the frontend while routing it to the backend deployed on external server)
+- **Backend (Railway) ✅** (Deployed on external server and established the connectivity between the 2 with full functionality)
 
 ---
 
@@ -81,6 +91,10 @@ cd fullstack-todo
 ![screenshot](example/screenshot%209.png)
 ![screenshot](example/screenshot%2010.png)
 ![screenshot](example/screenshot%2011.png)
+![screenshot](example/screenshot%2012.png)
+![screenshot](example/screenshot%2013.png)
+![screenshot](example/screenshot%2014.png)
+
 
 ---
 
