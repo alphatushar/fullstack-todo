@@ -10,6 +10,12 @@ CORS(app)
 
 tasks = []
 
+jwt = JWTManager(app)
+
+@jwt.invalid_token_loader
+def invalid_token_callback(reason):
+    return {"error": "Invalid token", "reason": reason}, 401
+
 
 # Configure Database
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -21,7 +27,7 @@ if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
 
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["JWT_SECRET_KEY"] = "supersecretjwtkey"  # change for production
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "supersecretjwtkey")  # change for production
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
@@ -56,6 +62,9 @@ def register():
     username = data.get("username")
     password = data.get("password")
 
+    if not username or not password:
+        return {"error": "Username and password required"}, 400
+
     if User.query.filter_by(username=username).first():
         return jsonify({"message": "User already exists"}), 400
 
@@ -75,6 +84,7 @@ def login():
     user = User.query.filter_by(username=username).first()
     if user and bcrypt.verify(password, user.password_hash):
         token = create_access_token(identity=str(user.id))
+
         return jsonify({"token": token}), 200
     return jsonify({"message": "Invalid credentials"}), 401
 
@@ -83,7 +93,7 @@ def login():
 @jwt_required()
 def get_tasks():
     try:
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         if user_id is None:
             return jsonify({"message": "Invalid token"}), 401
 
@@ -97,18 +107,21 @@ def get_tasks():
 @app.route("/tasks", methods=["POST"])
 @jwt_required()
 def add_task():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     data = request.json
     new_task = Task(task=data["task"], user_id=user_id)
     db.session.add(new_task)
-    db.session.commit()
-    return jsonify({"message": "Task added"}), 201
-
+    try:
+        db.session.commit()
+        return jsonify({"message": "Task added"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/tasks/<int:task_id>", methods=["DELETE"])
 @jwt_required()
 def delete_task(task_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     task = Task.query.filter_by(id=task_id, user_id=user_id).first()
     if task:
         db.session.delete(task)
