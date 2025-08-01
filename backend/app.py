@@ -13,6 +13,12 @@ tasks = []
 
 # Configure Database
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///todo.db")
+
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    # Render gives postgres:// but SQLAlchemy expects postgresql://
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JWT_SECRET_KEY"] = "supersecretjwtkey"  # change for production
