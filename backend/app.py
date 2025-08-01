@@ -12,7 +12,7 @@ tasks = []
 
 
 # Configure Database
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///todo.db")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     # Render gives postgres:// but SQLAlchemy expects postgresql://
@@ -45,6 +45,11 @@ with app.app_context():
 
 
 # ================= AUTH ROUTES =================
+
+@app.route("/", methods=["GET"])
+def home():
+    return {"status": "Backend Live!", "message": "Use /register or /login POST methods"}, 200
+
 @app.route("/register", methods=["POST"])
 def register():
     data = request.json
