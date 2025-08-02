@@ -43,6 +43,7 @@ class User(db.Model):
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(200), nullable=False)
+    completed = db.Column(db.Boolean, default=False)  # ✅ New column
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 # Initialize DB
@@ -96,10 +97,9 @@ def get_tasks():
         user_id = int(get_jwt_identity())
         if user_id is None:
             return jsonify({"message": "Invalid token"}), 401
-
         user_id = int(user_id)  # Convert safely
         tasks = Task.query.filter_by(user_id=user_id).all()
-        return jsonify([{"id": t.id, "task": t.task} for t in tasks])
+        return jsonify([{"id": t.id, "task": t.task, "completed": t.completed} for t in tasks])
     except Exception as e:
         print("Error in /tasks:", e)
         return jsonify({"error": str(e)}), 500
@@ -129,6 +129,25 @@ def delete_task(task_id):
         return jsonify({"message": "Task deleted"}), 200
     return jsonify({"message": "Task not found"}), 404
 
+
+@app.route("/tasks/<int:task_id>", methods=["PUT"])
+@jwt_required()
+def update_task(task_id):
+    user_id = int(get_jwt_identity())
+    data = request.json
+    task = Task.query.filter_by(id=task_id, user_id=user_id).first()
+
+    if not task:
+        return jsonify({"message": "Task not found"}), 404
+
+    # Update content or completion
+    if "task" in data:
+        task.task = data["task"]
+    if "completed" in data:
+        task.completed = data["completed"]
+
+    db.session.commit()
+    return jsonify({"message": "Task updated"}), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
