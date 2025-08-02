@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e5124fa7-a9d9-4e76-bfb7-9b0e86511331/deploy-status)](https://app.netlify.com/projects/superlative-kulfi-c16961/deploys)
 # **Full-Stack Dockerized Todo App**  
 
 A **production-ready full-stack Todo application** built with:  
