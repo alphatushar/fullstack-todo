@@ -1,42 +1,160 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* Full-page styling */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  transition: background 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #111827, #1f2937);
+}
+
+/* Center container */
+.min-h-screen {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   padding: 2rem;
-  text-align: center;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Card styling */
+.shadow-2xl {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
+.dark .shadow-2xl {
+  background: #1f2937;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.shadow-2xl:hover {
+  transform: translateY(-3px);
+}
+
+/* Task list items */
+ul li {
+  transition: all 0.3s ease;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul li:hover {
+  transform: scale(1.01);
+}
+
+.dark ul li {
+  background: #2d3748;
+  color: #e5e7eb;
+}
+
+/* Task input */
+input[type="text"] {
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.6);
+  border-color: #3b82f6;
+}
+
+/* Buttons */
+button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Completed Tasks Dropdown */
+details {
+  background: transparent;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+details summary {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+
+details[open] summary {
+  color: #3b82f6;
+}
+
+.dark details summary {
+  color: #cbd5e1;
+}
+
+details[open] ul {
+  animation: dropdownFade 0.3s ease;
+}
+
+@keyframes dropdownFade {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-5px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Completed task item styling */
+.line-through {
+  opacity: 0.8;
+  transition: opacity 0.3s;
 }
 
+.line-through:hover {
+  opacity: 1;
+}
+
+/* Smooth card animation and spacing */
 .card {
-  padding: 2em;
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-.read-the-docs {
-  color: #888;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
